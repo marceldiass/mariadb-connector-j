@@ -606,7 +606,7 @@ public abstract class AbstractConnectProtocol implements Protocol {
           + "'max_allowed_packet',"
           + "'system_time_zone',"
           + "'time_zone',"
-          + "'auto_increment_increment')");
+          + "'sql_mode')");
       results.commandEnd();
       ResultSet resultSet = results.getResultSet();
       if (resultSet != null) {
@@ -622,6 +622,7 @@ public abstract class AbstractConnectProtocol implements Protocol {
           throw ExceptionMapper.connException(
               "could not load system variables. socket connected: " + socket.isConnected());
         }
+        serverData.put("auto_increment_increment", "1");
       }
 
     } catch (SQLException sqlException) {
